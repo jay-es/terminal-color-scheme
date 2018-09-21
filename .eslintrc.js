@@ -1,16 +1,20 @@
+const env = process.env.NODE_ENV === 'production' ? 'error' : 'off'
+
 module.exports = {
   root: true,
   env: {
     node: true
   },
-  'extends': [
+  extends: [
     'plugin:vue/essential',
     '@vue/standard',
+    '@vue/prettier',
     '@vue/typescript'
   ],
   rules: {
-    'no-console': process.env.NODE_ENV === 'production' ? 'error' : 'off',
-    'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off'
+    'no-console': env,
+    'no-debugger': env,
+    '@vue/prettier': [env, require('./.prettierrc')]
   },
   parserOptions: {
     parser: 'typescript-eslint-parser'
