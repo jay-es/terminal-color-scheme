@@ -15,27 +15,26 @@
 </template>
 
 <script lang="ts">
-import Vue from 'vue'
+import { Component, Prop, Vue } from 'vue-property-decorator'
 import { mapState, mapGetters } from 'vuex'
 
-export default Vue.extend({
-  name: 'ColorTableRow',
-  props: {
-    colorName: {
-      type: String,
-      default: '',
-    },
-  },
+@Component({
   computed: {
     ...mapState(['colors']),
     ...mapGetters(['rgbValues']),
   },
-  methods: {
-    onChange(newVal: String): void {
-      this.$store.commit('setColor', [this.colorName, newVal])
-    },
-  },
 })
+export default class ColorTableRow extends Vue {
+  @Prop({
+    type: String,
+    default: '',
+  })
+  private colorName!: string
+
+  onChange(newVal: String): void {
+    this.$store.commit('setColor', [this.colorName, newVal])
+  }
+}
 </script>
 
 <style lang="scss">

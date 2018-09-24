@@ -24,17 +24,17 @@
 </template>
 
 <script lang="ts">
-import Vue from 'vue'
+import { Component, Vue } from 'vue-property-decorator'
 import { mapState } from 'vuex'
 import ColorTableRow from './ColorTableRow.vue'
 
-export default Vue.extend({
-  name: 'ColorTable',
+@Component({
   components: {
     ColorTableRow,
   },
   computed: mapState(['colors']),
 })
+export default class ColorTable extends Vue {}
 </script>
 
 <style lang="scss" scoped>

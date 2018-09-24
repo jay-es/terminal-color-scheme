@@ -5,15 +5,15 @@
 </template>
 
 <script lang="ts">
-import Vue from 'vue'
+import { Component, Vue } from 'vue-property-decorator'
 import ColorTable from './components/ColorTable.vue'
 
-export default Vue.extend({
-  name: 'App',
+@Component({
   components: {
     ColorTable,
   },
 })
+export default class App extends Vue {}
 </script>
 
 <style lang="scss">
