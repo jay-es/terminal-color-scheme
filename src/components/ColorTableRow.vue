@@ -21,7 +21,7 @@ import { mapState, mapGetters } from 'vuex'
 @Component({
   computed: {
     ...mapState(['colors']),
-    ...mapGetters(['rgbValues']),
+    ...mapGetters({ rgbValues: 'colors/rgbValues' }),
   },
 })
 export default class ColorTableRow extends Vue {
@@ -32,7 +32,7 @@ export default class ColorTableRow extends Vue {
   private colorName!: string
 
   onChange(newVal: String): void {
-    this.$store.commit('setColor', [this.colorName, newVal])
+    this.$store.commit('colors/setColor', [this.colorName, newVal])
   }
 }
 </script>
