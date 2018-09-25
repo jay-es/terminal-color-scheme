@@ -35,7 +35,7 @@ export default new Vuex.Store({
       const obj: Colors = {}
 
       Object.entries(colors).forEach(([key, val]: [string, string]) => {
-        obj[key] =  [val.substr(1, 2), val.substr(3, 2), val.substr(5, 2)]
+        obj[key] = [val.substr(1, 2), val.substr(3, 2), val.substr(5, 2)]
           .map(v => parseInt(v, 16))
           .join()
       })
