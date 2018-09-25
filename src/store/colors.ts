@@ -1,7 +1,18 @@
 import { GetterTree, Module, MutationTree } from 'vuex'
+import { hexToDec, rgbToHsl } from '@/scripts/colorConverters'
 
 interface ColorsState {
   [key: string]: string
+}
+
+const objectMap = (store: ColorsState, fn: Function) => {
+  const obj: ColorsState = {}
+
+  Object.entries(state).forEach(([key, val]: [string, string]) => {
+    obj[key] = fn(val, key)
+  })
+
+  return obj
 }
 
 const state: ColorsState = {
@@ -25,15 +36,10 @@ const state: ColorsState = {
 
 const getters: GetterTree<ColorsState, any> = {
   rgbValues(state): ColorsState {
-    const obj: ColorsState = {}
-
-    Object.entries(state).forEach(([key, val]: [string, string]) => {
-      obj[key] = [val.substr(1, 2), val.substr(3, 2), val.substr(5, 2)]
-        .map(v => parseInt(v, 16))
-        .join()
-    })
-
-    return obj
+    return objectMap(state, (v: string) => hexToDec(v).join())
+  },
+  hlsValues(state): ColorsState {
+    return objectMap(state, (v: string) => rgbToHsl(hexToDec(v)).join())
   },
 }
 
