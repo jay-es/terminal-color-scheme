@@ -10,18 +10,20 @@
         @change="onChange($event.target.value)"
       >
     </td>
-    <td class="color-disp">{{ rgbValues[colorName] }}</td>
+    <td :style="valueCellStyle">{{ rgbValues[colorName] }}</td>
+    <td :style="valueCellStyle">{{ hlsValues[colorName] }}</td>
   </tr>
 </template>
 
 <script lang="ts">
 import { Component, Prop, Vue } from 'vue-property-decorator'
 import { mapState, mapGetters } from 'vuex'
+import { ColorsState } from '@/store/colors'
 
 @Component({
   computed: {
     ...mapState(['colors']),
-    ...mapGetters({ rgbValues: 'colors/rgbValues' }),
+    ...mapGetters('colors', ['rgbValues', 'hlsValues']),
   },
 })
 export default class ColorTableRow extends Vue {
@@ -30,6 +32,18 @@ export default class ColorTableRow extends Vue {
     default: '',
   })
   private colorName!: string
+
+  // computed
+  private colors!: ColorsState
+  private rgbValues!: ColorsState
+  private hlsValues!: ColorsState
+
+  get valueCellStyle() {
+    return {
+      color: this.colors.brightWhite,
+      'font-size': '12px',
+    }
+  }
 
   onChange(newVal: String): void {
     this.$store.commit('colors/setColor', [this.colorName, newVal])
@@ -40,8 +54,5 @@ export default class ColorTableRow extends Vue {
 <style lang="scss">
 .colortable td {
   padding: 0.1em 0.75em;
-}
-.color-disp {
-  font-size: 12px;
 }
 </style>

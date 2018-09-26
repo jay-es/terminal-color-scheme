@@ -1,11 +1,11 @@
 import { GetterTree, Module, MutationTree } from 'vuex'
 import { hexToDec, rgbToHsl } from '@/scripts/colorConverters'
 
-interface ColorsState {
+export interface ColorsState {
   [key: string]: string
 }
 
-const objectMap = (store: ColorsState, fn: Function) => {
+const objectMap = (state: ColorsState, fn: Function) => {
   const obj: ColorsState = {}
 
   Object.entries(state).forEach(([key, val]: [string, string]) => {
