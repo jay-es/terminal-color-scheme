@@ -5,13 +5,14 @@
     <td>gYw</td><td>gYw</td><td>gYw</td>
     <td>
       <input
+        v-show="colors[colorName]"
         :value="colors[colorName]"
         type="color"
         @change="onChange($event.target.value)"
       >
     </td>
-    <td :style="valueCellStyle">{{ rgbValues[colorName] }}</td>
-    <td :style="valueCellStyle">{{ hlsValues[colorName] }}</td>
+    <td :style="valueCellStyle">{{ rgbValues[colorName] || 'RGB' }}</td>
+    <td :style="valueCellStyle">{{ hlsValues[colorName] || 'HLS' }}</td>
   </tr>
 </template>
 
@@ -53,6 +54,12 @@ export default class ColorTableRow extends Vue {
 
 <style lang="scss">
 .colortable td {
-  padding: 0.1em 0.75em;
+  padding: 0 0.75em;
+  height: 2em;
+
+  > input {
+    height: 100%;
+    box-sizing: border-box;
+  }
 }
 </style>
