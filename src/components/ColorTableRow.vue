@@ -12,7 +12,7 @@
       >
     </td>
     <td :style="valueCellStyle">{{ rgbValues[colorName] || 'RGB' }}</td>
-    <td :style="valueCellStyle">{{ hlsValues[colorName] || 'HLS' }}</td>
+    <td :style="valueCellStyle">{{ hlsValues[colorName] || 'HSL' }}</td>
   </tr>
 </template>
 

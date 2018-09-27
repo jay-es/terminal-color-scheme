@@ -45,6 +45,14 @@ const getters: GetterTree<ColorsState, any> = {
 
 const mutations: MutationTree<ColorsState> = {
   setColor(state, [key, val]: [string, string]): void {
+    if (!state.hasOwnProperty(key)) {
+      return console.error('colors/setColor カラー名が不正', { key, val })
+    }
+
+    if (!/^#[\da-f]{6}$/i.test(val)) {
+      return console.error('colors/setColor 色の値が不正', { key, val })
+    }
+
     state[key] = val
   },
 }
