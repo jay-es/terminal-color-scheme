@@ -11,7 +11,7 @@
 import { Component, Vue } from 'vue-property-decorator'
 
 @Component
-export default class ColorTable extends Vue {
+export default class FileInput extends Vue {
   onChange(files: FileList): void {
     if (!files.length) return
 
