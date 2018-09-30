@@ -40,5 +40,6 @@ export default class ColorTable extends Vue {}
 <style lang="scss" scoped>
 section {
   padding: 1em;
+  overflow-x: scroll;
 }
 </style>
