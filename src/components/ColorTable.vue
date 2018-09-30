@@ -2,14 +2,11 @@
   <section :style="{ 'background-color': colors.darkBlack, 'color': colors.brightWhite }">
     <table class="colortable">
       <col>
-      <col :style="{ 'background-color': colors.darkBlack }">
-      <col :style="{ 'background-color': colors.darkRed }">
-      <col :style="{ 'background-color': colors.darkGreen }">
-      <col :style="{ 'background-color': colors.darkYellow }">
-      <col :style="{ 'background-color': colors.darkBlue }">
-      <col :style="{ 'background-color': colors.darkMagenta }">
-      <col :style="{ 'background-color': colors.darkCyan }">
-      <col :style="{ 'background-color': colors.darkWhite }">
+      <col
+        v-for="v of darkColors"
+        :key="v"
+        :style="{ 'background-color': colors[v] }"
+      >
       <thead/>
       <tbody>
         <color-table-row/>
@@ -27,6 +24,7 @@
 import { Component, Vue } from 'vue-property-decorator'
 import { mapState } from 'vuex'
 import ColorTableRow from './ColorTableRow.vue'
+import { ColorsState } from '@/store/colors'
 
 @Component({
   components: {
@@ -34,7 +32,13 @@ import ColorTableRow from './ColorTableRow.vue'
   },
   computed: mapState(['colors']),
 })
-export default class ColorTable extends Vue {}
+export default class ColorTable extends Vue {
+  private colors!: ColorsState
+
+  get darkColors(): string[] {
+    return Object.keys(this.colors).filter(v => v.startsWith('dark'))
+  }
+}
 </script>
 
 <style lang="scss" scoped>
